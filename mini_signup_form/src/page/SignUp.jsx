@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { regex } from '../util/regex';
 
 const SignUp = () => {
   const [formState, setFormState] = useState({
@@ -14,8 +15,10 @@ const SignUp = () => {
 
   const onEmailChange = (e) => {
     setFormState({ ...formState, email: e.target.value });
+    console.log('email', regex.email.test(e.target.value));
   };
   const onPasswordChange = (e) => {
+    console.log('password', regex.password.test(e.target.value));
     setFormState({ ...formState, password: e.target.value });
   };
   const onPasswordConfirmChange = (e) => {
