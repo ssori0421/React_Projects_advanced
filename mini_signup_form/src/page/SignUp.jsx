@@ -7,24 +7,32 @@ const SignUp = () => {
     password: '',
     passwordConfirm: '',
   });
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [isValidPassword, setIsValidPassword] = useState(false);
   const emailInputRef = useRef(null);
 
   useEffect(() => {
     emailInputRef.current.focus();
   }, []);
 
+  console.log(isValidEmail, isValidPassword);
+
   const onEmailChange = (e) => {
+    const { value } = e.target;
+    const isValid = regex.email.test(value);
+    setIsValidEmail(isValid);
     setFormState({ ...formState, email: e.target.value });
-    console.log('email', regex.email.test(e.target.value));
   };
   const onPasswordChange = (e) => {
+    const { value } = e.target;
+    const isValid = regex.password.test(value);
+    setIsValidPassword(isValid);
     console.log('password', regex.password.test(e.target.value));
     setFormState({ ...formState, password: e.target.value });
   };
   const onPasswordConfirmChange = (e) => {
     setFormState({ ...formState, passwordConfirm: e.target.value });
   };
-  console.log(formState);
 
   return (
     <div>
