@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const SignUp = () => {
   const [formState, setFormState] = useState({
@@ -6,6 +6,12 @@ const SignUp = () => {
     password: '',
     passwordConfirm: '',
   });
+  const emailInputRef = useRef(null);
+
+  useEffect(() => {
+    emailInputRef.current.focus();
+  }, []);
+
   const onEmailChange = (e) => {
     setFormState({ ...formState, email: e.target.value });
   };
@@ -19,7 +25,11 @@ const SignUp = () => {
 
   return (
     <div>
-      <input data-testid='email-input' onChange={onEmailChange} />
+      <input
+        ref={emailInputRef}
+        data-testid='email-input'
+        onChange={onEmailChange}
+      />
       <input data-testid='password-input' onChange={onPasswordChange} />
       <input
         data-testid='password-confirm-input'
